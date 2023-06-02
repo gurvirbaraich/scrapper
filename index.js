@@ -16,7 +16,6 @@ const IN_PRODUCTION = process.env.IN_PRODUCTION == IN_PRODUCTION_FLAG;
 
 const cors = require("cors");
 const express = require("express");
-const chrome = require("chrome-aws-lambda");
 
 const puppeteer = require("puppeteer");
 const { workerMain } = require("./endpoints");
@@ -29,10 +28,9 @@ app.use(
     origin: "*",
     methods: ["GET"],
   })
-)(async function () {
+);(async function () {
   const launchOptions = {
     args: ["--no-sandbox"],
-    defaultViewport: chrome.defaultViewport,
     headless: IN_PRODUCTION ? "new" : false,
   };
 
